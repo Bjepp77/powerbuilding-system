@@ -1006,8 +1006,8 @@ function renderWorkout(){
       if(val){pw=val.w;pr=val.r;}
       else{
         const last=state.lastByEx[ex.n];
-        if(last&&last.sets[i]){pw=last.sets[i].w;pr=last.sets[i].r;}
-        else if(t&&t.w){pw=fmtW(t.w);pr=(repRange(ex.r)||['',''])[0];}
+        if(t&&t.w){pw=fmtW(t.w);pr=(repRange(ex.r)||['',''])[0];}
+        else if(last&&last.sets[i]){pw=last.sets[i].w;pr=last.sets[i].r;}
         else{const rr=repRange(ex.r);pr=rr?rr[0]:'';}
       }
       const done=ed.done&&ed.done[i];
