@@ -531,13 +531,18 @@ const PROGRAM = [
     {n:'DUMBBELL LATERAL RAISE', w:0, s:2, r:'15-20', rpe:'10', rest:'1-2 min', v:'latraise', note:'Arc the dumbbell out. Mind-muscle connection with middle fibers'},
     {n:'CONCENTRATION BICEP CURL', w:0, s:3, r:'12-15', rpe:'9', rest:'1-2 min', v:'conccurl', note:'Pin your elbow against your upper leg or the back of a bench'}
   ]},
-  {id:'l2', name:'Lower #2', tag:'Squat focus', ex:[
-    {n:'BACK SQUAT', w:4, s:3, r:'6', p:'75%', rest:'3-4 min', l:'squat', v:'squat', note:'Sit back and down, keep your upper back tight to the bar'},
-    {n:'GOOD MORNING', w:2, s:2, r:'10-12', rpe:'7', rest:'2-3 min', v:'gm', note:'Same as squat stance, keep shins straight. Go lighter and "feel" hamstrings'},
-    {n:'LEG EXTENSION', w:1, s:3, r:'12-15', rpe:'9', rest:'1-2 min', v:'legext', note:'Use bands if no machine access. Mind-muscle connection with quads'},
-    {n:'STANDING CALF RAISE', w:0, s:3, r:'15-20', rpe:'9', rest:'1-2 min', v:'calf', note:'Emphasize the mind-muscle connection'},
-    {n:'BANDED LATERAL WALK OR HIP ABDUCTION', w:0, s:3, r:'15-20', rpe:'9', rest:'1-2 min', v:'bandwalk', vars:WALKVAR, note:'Point toes slightly outward. Mind-muscle connection with glutes'},
-    {n:'V SIT-UP', w:0, s:3, r:'12-15', rpe:'9', rest:'1-2 min', v:'vsitup', note:'Think about squeezing your upper and lower abs together'}
+  {id:'l2', name:'Lower #2', tag:'Trench Lower A - bilateral', ex:[
+    {n:'POGO JUMPS', w:0, s:1, r:'20-30 reps', rest:'-', opt:true, note:'Optional Trench primer. Knees relatively straight, bounce through the ankles, minimal ground contact, land quietly over the midfoot.'},
+    {n:'CALF RAISE', w:1, s:2, r:'6-12', rpe:'9-10', rest:'1-2 min', v:'calf', note:'1 bent-knee set + 1 straight-leg set (or 2 straight-leg if only one variation). Deep stretch, pause at the bottom, squeeze at the top.'},
+    {n:'HIP ADDUCTION', w:0, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', note:'Trench slot: Copenhagen, Roman chair, or adductor machine. Lengthened variations preferred. Largest comfortable range, control the eccentric.'},
+    {n:'LEG EXTENSION', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legext', note:'Trench pre-fatigue slot, before the squat. If pre-fatiguing consistently reduces squat performance after several weeks, move it after the squat and hinge work. Full range, control the eccentric.'},
+    {n:'BACK SQUAT', w:3, s:2, r:'3-5', rpe:'8', rest:'3-4 min', l:'squat', v:'squat', note:'Trench bilateral squat pattern (or top set x3 + backdown x5). Safety bar, front squat, hack, or pendulum all work. Brace before each rep, controlled descent, drive up explosively. Belt and sleeves if preferred.'},
+    {n:'ROMANIAN DEADLIFT', w:2, s:2, r:'3-5', rpe:'8', rest:'3-4 min', v:'dlconv', note:'Trench hip hinge slot (or top set x3 + backdown x5). Stiff-leg, conventional, trap bar, or good morning all work. Hips back, weight close, drive the hips through. Straps and belt recommended.'},
+    {n:'HIP ABDUCTION MACHINE', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', vars:WALKVAR, note:'Trench slot: machine or cable airplane. Pelvis level, lead with the outside of the hip, pause in the lengthened position, no momentum.'},
+    {n:'SEATED LEG CURL', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legcurl', note:'Seated preferred; glute-ham raise or unilateral lying curl also work. Full knee extension each rep, control the eccentric, squeeze at the top.'},
+    {n:'SIT-UP', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', v:'vsitup', note:'Trench lumbar flexion slot: GHD, decline, cable crunch, or hanging leg raise all work. Initiate with lumbar flexion, posterior pelvic tilt at the top.'},
+    {n:'DUMBBELL SIDE BEND', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', note:'Trench lateral flexion slot: cable or machine side bend also work. Spinal lateral flexion only, no torso rotation, pause in the stretch.'},
+    {n:'BOX JUMPS', w:0, s:1, r:'3-5 reps', rest:'-', opt:true, note:'Optional Trench power slot. Alternate box vertical jumps and box broad jumps. New to plyometrics: pogo jumps only for the first 4-6 weeks.'}
   ]},
   {id:'u2', name:'Upper #2', tag:'OHP / Push Press', ex:[
     {n:'OVERHEAD PRESS / PUSH PRESS', w:3, s:3, r:'3/3', p:'80%', rest:'3-4 min', l:'ohp', v:'ohp', note:'First 3 reps strict military press (no leg drive), last 3 reps push press (use leg drive)'},
@@ -549,13 +554,18 @@ const PROGRAM = [
     {n:'BENT OVER REVERSE DUMBBELL FLYE', w:1, s:2, r:'15-20', rpe:'9', rest:'30s', sup:'A2', v:'revflye', note:'Mind-muscle connection with rear delts. Sweep the weight out'},
     {n:'BARBELL SKULL CRUSHER', w:1, s:2, r:'8-10', rpe:'8', rest:'1-2 min', v:'skull', note:'Do these on a bench. Constant tension on triceps'}
   ]},
-  {id:'l3', name:'Lower #3', tag:'Block pull focus', ex:[
-    {n:'4" BLOCK PULL', w:4, s:2, r:'4', rpe:'8', rest:'4-5 min', v:'blockpull', note:'Do block pulls from a 4" block (can use 45lb bumper plate as a block)'},
-    {n:'BULGARIAN SPLIT SQUAT', w:1, s:2, r:'12', rpe:'7', rest:'2-3 min', v:'bss', note:'12 reps each leg, keep your torso upright, constant tension on quads'},
-    {n:'BARBELL 45° HYPEREXTENSION OR HIP THRUST', w:1, s:2, r:'8-10', rpe:'7', rest:'1-2 min', v:'hyper', vars:HIPTHRUSTVAR, note:'Do barbell hip thrusts if no machine. Use glutes to move the weight'},
-    {n:'SEATED CALF RAISE', w:0, s:3, r:'15-20', rpe:'9', rest:'1-2 min', v:'seatedcalf', note:'Do standing if no machine. Emphasize the mind-muscle connection'},
-    {n:'HANGING LEG RAISE', w:0, s:3, r:'10-12', rpe:'8', rest:'1-2 min', v:'hlr', note:'Knees to chest, controlled reps. Straighten legs more to increase difficulty'},
-    {n:'NECK FLEXION/EXTENSION', w:1, s:3, r:'12/12', rpe:'8', rest:'1-2 min', opt:true, v:'neck', note:'12 reps flexion (front of neck), 12 reps extension (back of neck)'}
+  {id:'l3', name:'Lower #3', tag:'Trench Lower B - unilateral', ex:[
+    {n:'POGO JUMPS', w:0, s:1, r:'20-30 reps', rest:'-', opt:true, note:'Optional Trench primer. Knees relatively straight, bounce through the ankles, minimal ground contact, land quietly over the midfoot.'},
+    {n:'CALF RAISE', w:0, s:2, r:'6-12', rpe:'9-10', rest:'1-2 min', v:'calf', note:'1 bent-knee set + 1 straight-leg set (or 2 straight-leg if only one variation). Deep stretch, pause at the bottom, squeeze at the top.'},
+    {n:'HIP ADDUCTION', w:0, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', note:'Trench slot: Copenhagen, Roman chair, or adductor machine. Lengthened variations preferred. Largest comfortable range, control the eccentric.'},
+    {n:'UNILATERAL LEG EXTENSION', w:1, s:2, r:'6-8 per leg', rpe:'9-10', rest:'1-2 min', v:'legext', note:'Trench pre-fatigue slot, one leg at a time. Full range, secure yourself with the handles, control the eccentric.'},
+    {n:'BULGARIAN SPLIT SQUAT', w:2, s:2, r:'3-5 per leg', rpe:'8', rest:'2-3 min', v:'bss', note:'Trench unilateral squat pattern (or top set x3 + backdown x5). Split squat, reverse lunge, Hatfield, or unilateral leg press all work. Dumbbells: log weight per hand.'},
+    {n:'SEATED GOOD MORNING', w:2, s:2, r:'3-5', rpe:'8', rest:'2-3 min', v:'gm', note:'Trench seated hip hinge slot (or top set x3 + backdown x5). Cable row hip hinge also works. Perform beltless, straps if needed.'},
+    {n:'HIP ABDUCTION MACHINE', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', vars:WALKVAR, note:'Trench slot: machine or cable airplane. Pelvis level, lead with the outside of the hip, pause in the lengthened position, no momentum.'},
+    {n:'SEATED LEG CURL', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legcurl', note:'Seated preferred; glute-ham raise or unilateral lying curl also work. Full knee extension each rep, control the eccentric, squeeze at the top.'},
+    {n:'SIT-UP', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', v:'vsitup', note:'Trench lumbar flexion slot: GHD, decline, cable crunch, or hanging leg raise all work. Initiate with lumbar flexion, posterior pelvic tilt at the top.'},
+    {n:'DUMBBELL SIDE BEND', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', note:'Trench lateral flexion slot: cable or machine side bend also work. Spinal lateral flexion only, no torso rotation, pause in the stretch.'},
+    {n:'BOX JUMPS', w:0, s:1, r:'3-5 reps', rest:'-', opt:true, note:'Optional Trench power slot. Alternate box vertical jumps and box broad jumps. New to plyometrics: pogo jumps only for the first 4-6 weeks.'}
   ]},
   {id:'u3', name:'Upper #3', tag:'Bench variation + pump', ex:[
     {n:'FLAT-BACK BARBELL BENCH PRESS', w:3, s:3, r:'10', rpe:'7', rest:'2-3 min', v:'flatback', note:'Shoulder blades still retracted and depressed. Slight arch in upper back. Minimize leg drive.'},
@@ -621,13 +631,18 @@ const PROGRAM = [
     {n:'DUMBBELL LATERAL RAISE', w:0, s:2, r:'15-20', rpe:'8', rest:'1-2 min', v:'latraise', note:'Arc the dumbbell out. Mind-muscle connection with middle fibers'},
     {n:'CONCENTRATION BICEP CURL', w:0, s:3, r:'12-15', rpe:'8', rest:'1-2 min', v:'conccurl', note:'Pin your elbow against your upper leg or the back of a bench'}
   ]},
-  {id:'l2', name:'Lower #2', tag:'Squat focus', ex:[
-    {n:'BACK SQUAT', w:4, s:1, r:'1', p:'90-95%', rpe:'9', rest:'4-5 min', l:'squat', top:true, v:'squat', note:'Only heavy set this week! Perfect technique!'},
-    {n:'LOW-BAR BACK SQUAT', w:0, s:2, r:'7', p:'75%', rest:'3-4 min', l:'squat', v:'lowbar', note:'Sit back and down, keep your upper back tight to the bar'},
-    {n:'LEG EXTENSION', w:1, s:3, r:'12-15', rpe:'8', rest:'1-2 min', v:'legext', note:'Use bands if no machine access. Mind-muscle connection with quads'},
-    {n:'STANDING CALF RAISE', w:0, s:3, r:'15-20', rpe:'8', rest:'1-2 min', v:'calf', note:'Emphasize the mind-muscle connection'},
-    {n:'BANDED LATERAL WALK OR HIP ABDUCTION', w:0, s:3, r:'15-20', rpe:'8', rest:'1-2 min', v:'bandwalk', vars:WALKVAR, note:'Point toes slightly outward. Mind-muscle connection with glutes'},
-    {n:'V SIT-UP', w:0, s:3, r:'12-15', rpe:'8', rest:'1-2 min', v:'vsitup', note:'Think about squeezing your upper and lower abs together'}
+  {id:'l2', name:'Lower #2', tag:'Trench Lower A - bilateral', ex:[
+    {n:'POGO JUMPS', w:0, s:1, r:'20-30 reps', rest:'-', opt:true, note:'Optional Trench primer. Knees relatively straight, bounce through the ankles, minimal ground contact, land quietly over the midfoot.'},
+    {n:'CALF RAISE', w:1, s:2, r:'6-12', rpe:'9-10', rest:'1-2 min', v:'calf', note:'1 bent-knee set + 1 straight-leg set (or 2 straight-leg if only one variation). Deep stretch, pause at the bottom, squeeze at the top.'},
+    {n:'HIP ADDUCTION', w:0, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', note:'Trench slot: Copenhagen, Roman chair, or adductor machine. Lengthened variations preferred. Largest comfortable range, control the eccentric.'},
+    {n:'LEG EXTENSION', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legext', note:'Trench pre-fatigue slot, before the squat. If pre-fatiguing consistently reduces squat performance after several weeks, move it after the squat and hinge work. Full range, control the eccentric.'},
+    {n:'BACK SQUAT', w:3, s:2, r:'3-5', rpe:'8', rest:'3-4 min', l:'squat', v:'squat', note:'Trench bilateral squat pattern (or top set x3 + backdown x5). Safety bar, front squat, hack, or pendulum all work. Brace before each rep, controlled descent, drive up explosively. Belt and sleeves if preferred.'},
+    {n:'ROMANIAN DEADLIFT', w:2, s:2, r:'3-5', rpe:'8', rest:'3-4 min', v:'dlconv', note:'Trench hip hinge slot (or top set x3 + backdown x5). Stiff-leg, conventional, trap bar, or good morning all work. Hips back, weight close, drive the hips through. Straps and belt recommended.'},
+    {n:'HIP ABDUCTION MACHINE', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', vars:WALKVAR, note:'Trench slot: machine or cable airplane. Pelvis level, lead with the outside of the hip, pause in the lengthened position, no momentum.'},
+    {n:'SEATED LEG CURL', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legcurl', note:'Seated preferred; glute-ham raise or unilateral lying curl also work. Full knee extension each rep, control the eccentric, squeeze at the top.'},
+    {n:'SIT-UP', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', v:'vsitup', note:'Trench lumbar flexion slot: GHD, decline, cable crunch, or hanging leg raise all work. Initiate with lumbar flexion, posterior pelvic tilt at the top.'},
+    {n:'DUMBBELL SIDE BEND', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', note:'Trench lateral flexion slot: cable or machine side bend also work. Spinal lateral flexion only, no torso rotation, pause in the stretch.'},
+    {n:'BOX JUMPS', w:0, s:1, r:'3-5 reps', rest:'-', opt:true, note:'Optional Trench power slot. Alternate box vertical jumps and box broad jumps. New to plyometrics: pogo jumps only for the first 4-6 weeks.'}
   ]},
   {id:'u2', name:'Upper #2', tag:'OHP focus', ex:[
     {n:'OVERHEAD PRESS', w:3, s:3, r:'4', p:'82.5%', rest:'3-4 min', l:'ohp', v:'ohp', note:'Squeeze your glutes to keep your torso upright, press up and slightly back'},
@@ -639,13 +654,18 @@ const PROGRAM = [
     {n:'UPRIGHT ROW', w:1, s:2, r:'15-20', rpe:'7', rest:'30s', sup:'A2', v:'upright', note:'Can use cables/rope, bands or dumbbells. Stop ROM once elbows reach shoulder height'},
     {n:'BARBELL SKULL CRUSHER', w:1, s:2, r:'8-10', rpe:'7', rest:'1-2 min', v:'skull', note:'Do these on a bench. Constant tension on triceps'}
   ]},
-  {id:'l3', name:'Lower #3', tag:'Block pull focus', ex:[
-    {n:'3" BLOCK PULL', w:4, s:2, r:'4', rpe:'6', rest:'4-5 min', v:'blockpull', note:'Do block pulls from a 3" block (can use 25lb + 10lb bumper as blocks)'},
-    {n:'BULGARIAN SPLIT SQUAT', w:1, s:2, r:'12', rpe:'6', rest:'2-3 min', v:'bss', note:'12 reps each leg, keep your torso upright, constant tension on quads'},
-    {n:'BARBELL 45° HYPEREXTENSION OR HIP THRUST', w:1, s:2, r:'8-10', rpe:'6', rest:'1-2 min', v:'hyper', vars:HIPTHRUSTVAR, note:'Do barbell hip thrusts if no machine. Use glutes to move the weight'},
-    {n:'SEATED CALF RAISE', w:0, s:3, r:'15-20', rpe:'8', rest:'1-2 min', v:'seatedcalf', note:'Do standing if no machine. Emphasize the mind-muscle connection'},
-    {n:'HANGING LEG RAISE', w:0, s:3, r:'10-12', rpe:'8', rest:'1-2 min', v:'hlr', note:'Knees to chest, controlled reps. Straighten legs more to increase difficulty'},
-    {n:'NECK FLEXION/EXTENSION', w:1, s:3, r:'12/12', rpe:'8', rest:'1-2 min', opt:true, v:'neck', note:'12 reps flexion (front of neck), 12 reps extension (back of neck)'}
+  {id:'l3', name:'Lower #3', tag:'Trench Lower B - unilateral', ex:[
+    {n:'POGO JUMPS', w:0, s:1, r:'20-30 reps', rest:'-', opt:true, note:'Optional Trench primer. Knees relatively straight, bounce through the ankles, minimal ground contact, land quietly over the midfoot.'},
+    {n:'CALF RAISE', w:0, s:2, r:'6-12', rpe:'9-10', rest:'1-2 min', v:'calf', note:'1 bent-knee set + 1 straight-leg set (or 2 straight-leg if only one variation). Deep stretch, pause at the bottom, squeeze at the top.'},
+    {n:'HIP ADDUCTION', w:0, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', note:'Trench slot: Copenhagen, Roman chair, or adductor machine. Lengthened variations preferred. Largest comfortable range, control the eccentric.'},
+    {n:'UNILATERAL LEG EXTENSION', w:1, s:2, r:'6-8 per leg', rpe:'9-10', rest:'1-2 min', v:'legext', note:'Trench pre-fatigue slot, one leg at a time. Full range, secure yourself with the handles, control the eccentric.'},
+    {n:'BULGARIAN SPLIT SQUAT', w:2, s:2, r:'3-5 per leg', rpe:'8', rest:'2-3 min', v:'bss', note:'Trench unilateral squat pattern (or top set x3 + backdown x5). Split squat, reverse lunge, Hatfield, or unilateral leg press all work. Dumbbells: log weight per hand.'},
+    {n:'SEATED GOOD MORNING', w:2, s:2, r:'3-5', rpe:'8', rest:'2-3 min', v:'gm', note:'Trench seated hip hinge slot (or top set x3 + backdown x5). Cable row hip hinge also works. Perform beltless, straps if needed.'},
+    {n:'HIP ABDUCTION MACHINE', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', vars:WALKVAR, note:'Trench slot: machine or cable airplane. Pelvis level, lead with the outside of the hip, pause in the lengthened position, no momentum.'},
+    {n:'SEATED LEG CURL', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legcurl', note:'Seated preferred; glute-ham raise or unilateral lying curl also work. Full knee extension each rep, control the eccentric, squeeze at the top.'},
+    {n:'SIT-UP', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', v:'vsitup', note:'Trench lumbar flexion slot: GHD, decline, cable crunch, or hanging leg raise all work. Initiate with lumbar flexion, posterior pelvic tilt at the top.'},
+    {n:'DUMBBELL SIDE BEND', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', note:'Trench lateral flexion slot: cable or machine side bend also work. Spinal lateral flexion only, no torso rotation, pause in the stretch.'},
+    {n:'BOX JUMPS', w:0, s:1, r:'3-5 reps', rest:'-', opt:true, note:'Optional Trench power slot. Alternate box vertical jumps and box broad jumps. New to plyometrics: pogo jumps only for the first 4-6 weeks.'}
   ]},
   {id:'u3', name:'Upper #3', tag:'Bench variation + pump', ex:[
     {n:'FLAT-BACK BARBELL BENCH PRESS', w:3, s:3, r:'10', rpe:'7', rest:'2-3 min', v:'flatback', note:'Shoulder blades still retracted and depressed. Slight arch in upper back. Minimize leg drive.'},
@@ -711,13 +731,18 @@ const PROGRAM = [
     {n:'DUMBBELL LATERAL RAISE', w:0, s:3, r:'15-20', rpe:'10', rest:'1-2 min', v:'latraise', note:'Arc the dumbbell out. Mind-muscle connection with middle fibers'},
     {n:'CONCENTRATION BICEP CURL', w:0, s:3, r:'12-15', rpe:'10', rest:'1-2 min', v:'conccurl', note:'Pin your elbow against your upper leg or the back of a bench'}
   ]},
-  {id:'l2', name:'Lower #2', tag:'Squat focus', ex:[
-    {n:'LOW-BAR BACK SQUAT', w:4, s:3, r:'7', p:'75%', rest:'3-4 min', l:'squat', v:'lowbar', note:'Sit back and down, keep your upper back tight to the bar'},
-    {n:'GOOD MORNING', w:2, s:2, r:'10-12', rpe:'7', rest:'2-3 min', v:'gm', note:'Same as squat stance, keep shins straight. Go lighter and "feel" hamstrings'},
-    {n:'LEG EXTENSION', w:1, s:3, r:'12-15', rpe:'9', rest:'1-2 min', v:'legext', note:'Use bands if no machine access. Mind-muscle connection with quads'},
-    {n:'STANDING CALF RAISE', w:0, s:3, r:'15-20', rpe:'10', rest:'1-2 min', v:'calf', note:'Emphasize the mind-muscle connection'},
-    {n:'BANDED LATERAL WALK OR HIP ABDUCTION', w:0, s:3, r:'15-20', rpe:'10', rest:'1-2 min', v:'bandwalk', vars:WALKVAR, note:'Point toes slightly outward. Mind-muscle connection with glutes'},
-    {n:'V SIT-UP', w:0, s:3, r:'12-15', rpe:'10', rest:'1-2 min', v:'vsitup', note:'Think about squeezing your upper and lower abs together'}
+  {id:'l2', name:'Lower #2', tag:'Trench Lower A - bilateral', ex:[
+    {n:'POGO JUMPS', w:0, s:1, r:'20-30 reps', rest:'-', opt:true, note:'Optional Trench primer. Knees relatively straight, bounce through the ankles, minimal ground contact, land quietly over the midfoot.'},
+    {n:'CALF RAISE', w:1, s:2, r:'6-12', rpe:'9-10', rest:'1-2 min', v:'calf', note:'1 bent-knee set + 1 straight-leg set (or 2 straight-leg if only one variation). Deep stretch, pause at the bottom, squeeze at the top.'},
+    {n:'HIP ADDUCTION', w:0, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', note:'Trench slot: Copenhagen, Roman chair, or adductor machine. Lengthened variations preferred. Largest comfortable range, control the eccentric.'},
+    {n:'LEG EXTENSION', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legext', note:'Trench pre-fatigue slot, before the squat. If pre-fatiguing consistently reduces squat performance after several weeks, move it after the squat and hinge work. Full range, control the eccentric.'},
+    {n:'BACK SQUAT', w:3, s:2, r:'3-5', rpe:'8', rest:'3-4 min', l:'squat', v:'squat', note:'Trench bilateral squat pattern (or top set x3 + backdown x5). Safety bar, front squat, hack, or pendulum all work. Brace before each rep, controlled descent, drive up explosively. Belt and sleeves if preferred.'},
+    {n:'ROMANIAN DEADLIFT', w:2, s:2, r:'3-5', rpe:'8', rest:'3-4 min', v:'dlconv', note:'Trench hip hinge slot (or top set x3 + backdown x5). Stiff-leg, conventional, trap bar, or good morning all work. Hips back, weight close, drive the hips through. Straps and belt recommended.'},
+    {n:'HIP ABDUCTION MACHINE', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', vars:WALKVAR, note:'Trench slot: machine or cable airplane. Pelvis level, lead with the outside of the hip, pause in the lengthened position, no momentum.'},
+    {n:'SEATED LEG CURL', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legcurl', note:'Seated preferred; glute-ham raise or unilateral lying curl also work. Full knee extension each rep, control the eccentric, squeeze at the top.'},
+    {n:'SIT-UP', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', v:'vsitup', note:'Trench lumbar flexion slot: GHD, decline, cable crunch, or hanging leg raise all work. Initiate with lumbar flexion, posterior pelvic tilt at the top.'},
+    {n:'DUMBBELL SIDE BEND', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', note:'Trench lateral flexion slot: cable or machine side bend also work. Spinal lateral flexion only, no torso rotation, pause in the stretch.'},
+    {n:'BOX JUMPS', w:0, s:1, r:'3-5 reps', rest:'-', opt:true, note:'Optional Trench power slot. Alternate box vertical jumps and box broad jumps. New to plyometrics: pogo jumps only for the first 4-6 weeks.'}
   ]},
   {id:'u2', name:'Upper #2', tag:'OHP / Push Press', ex:[
     {n:'OVERHEAD PRESS / PUSH PRESS', w:3, s:3, r:'3/3', p:'82.5%', rest:'3-4 min', l:'ohp', v:'ohp', note:'First 3 reps strict military press (no leg drive), last 3 reps push press (use leg drive)'},
@@ -729,13 +754,18 @@ const PROGRAM = [
     {n:'BENT OVER REVERSE DUMBBELL FLYE', w:1, s:2, r:'15-20', rpe:'10', rest:'30s', sup:'A2', v:'revflye', note:'Mind-muscle connection with rear delts. Sweep the weight out'},
     {n:'BARBELL SKULL CRUSHER', w:1, s:2, r:'8-10', rpe:'10', rest:'1-2 min', v:'skull', note:'Do these on a bench. Constant tension on triceps'}
   ]},
-  {id:'l3', name:'Lower #3', tag:'Block pull focus', ex:[
-    {n:'2" BLOCK PULL', w:4, s:2, r:'4', rpe:'8', rest:'4-5 min', v:'blockpull', note:'Do block pulls from a 2" block (can use 25lb bumper plate as blocks)'},
-    {n:'BULGARIAN SPLIT SQUAT', w:1, s:2, r:'12', rpe:'7', rest:'2-3 min', v:'bss', note:'12 reps each leg, keep your torso upright, constant tension on quads'},
-    {n:'BARBELL 45° HYPEREXTENSION OR HIP THRUST', w:1, s:2, r:'8-10', rpe:'7', rest:'1-2 min', v:'hyper', vars:HIPTHRUSTVAR, note:'Do barbell hip thrusts if no machine. Use glutes to move the weight'},
-    {n:'SEATED CALF RAISE', w:0, s:3, r:'15-20', rpe:'9', rest:'1-2 min', v:'seatedcalf', note:'Do standing if no machine. Emphasize the mind-muscle connection'},
-    {n:'HANGING LEG RAISE', w:0, s:3, r:'10-12', rpe:'8', rest:'1-2 min', v:'hlr', note:'Knees to chest, controlled reps. Straighten legs more to increase difficulty'},
-    {n:'NECK FLEXION/EXTENSION', w:1, s:3, r:'12/12', rpe:'8', rest:'1-2 min', opt:true, v:'neck', note:'12 reps flexion (front of neck), 12 reps extension (back of neck)'}
+  {id:'l3', name:'Lower #3', tag:'Trench Lower B - unilateral', ex:[
+    {n:'POGO JUMPS', w:0, s:1, r:'20-30 reps', rest:'-', opt:true, note:'Optional Trench primer. Knees relatively straight, bounce through the ankles, minimal ground contact, land quietly over the midfoot.'},
+    {n:'CALF RAISE', w:0, s:2, r:'6-12', rpe:'9-10', rest:'1-2 min', v:'calf', note:'1 bent-knee set + 1 straight-leg set (or 2 straight-leg if only one variation). Deep stretch, pause at the bottom, squeeze at the top.'},
+    {n:'HIP ADDUCTION', w:0, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', note:'Trench slot: Copenhagen, Roman chair, or adductor machine. Lengthened variations preferred. Largest comfortable range, control the eccentric.'},
+    {n:'UNILATERAL LEG EXTENSION', w:1, s:2, r:'6-8 per leg', rpe:'9-10', rest:'1-2 min', v:'legext', note:'Trench pre-fatigue slot, one leg at a time. Full range, secure yourself with the handles, control the eccentric.'},
+    {n:'BULGARIAN SPLIT SQUAT', w:2, s:2, r:'3-5 per leg', rpe:'8', rest:'2-3 min', v:'bss', note:'Trench unilateral squat pattern (or top set x3 + backdown x5). Split squat, reverse lunge, Hatfield, or unilateral leg press all work. Dumbbells: log weight per hand.'},
+    {n:'SEATED GOOD MORNING', w:2, s:2, r:'3-5', rpe:'8', rest:'2-3 min', v:'gm', note:'Trench seated hip hinge slot (or top set x3 + backdown x5). Cable row hip hinge also works. Perform beltless, straps if needed.'},
+    {n:'HIP ABDUCTION MACHINE', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', vars:WALKVAR, note:'Trench slot: machine or cable airplane. Pelvis level, lead with the outside of the hip, pause in the lengthened position, no momentum.'},
+    {n:'SEATED LEG CURL', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legcurl', note:'Seated preferred; glute-ham raise or unilateral lying curl also work. Full knee extension each rep, control the eccentric, squeeze at the top.'},
+    {n:'SIT-UP', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', v:'vsitup', note:'Trench lumbar flexion slot: GHD, decline, cable crunch, or hanging leg raise all work. Initiate with lumbar flexion, posterior pelvic tilt at the top.'},
+    {n:'DUMBBELL SIDE BEND', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', note:'Trench lateral flexion slot: cable or machine side bend also work. Spinal lateral flexion only, no torso rotation, pause in the stretch.'},
+    {n:'BOX JUMPS', w:0, s:1, r:'3-5 reps', rest:'-', opt:true, note:'Optional Trench power slot. Alternate box vertical jumps and box broad jumps. New to plyometrics: pogo jumps only for the first 4-6 weeks.'}
   ]},
   {id:'u3', name:'Upper #3', tag:'Bench variation + pump', ex:[
     {n:'FLAT-BACK BARBELL BENCH PRESS', w:3, s:3, r:'10', rpe:'7', rest:'2-3 min', v:'flatback', note:'Shoulder blades still retracted and depressed. Slight arch in upper back. Minimize leg drive.'},
@@ -849,14 +879,18 @@ const PROGRAM = [
     {n:'TRICEPS PRESSDOWN', w:0, s:2, r:'12-15', rpe:'8', rest:'30s', sup:'B2', v:'pressdown', note:'Can do with cables or bands. Squeeze triceps to move the weight'}
   ]},
   REST,
-  {id:'l2', name:'Lower #2', tag:'Squat focus', ex:[
-    {n:'BACK SQUAT', w:4, s:2, r:'6', p:'70%', rest:'3-4 min', l:'squat', v:'squat', note:'Sit back and down, keep your upper back tight to the bar'},
-    {n:'SNATCH-GRIP ROMANIAN DEADLIFT', w:2, s:2, r:'8', rpe:'6', rest:'2-3 min', v:'sgrdl', note:'Wide grip. Mind-muscle connection with hamstrings'},
-    {n:'LEG EXTENSION', w:1, s:2, r:'12-15', rpe:'7', rest:'1-2 min', v:'legext', note:'Use bands if no machine access. Mind-muscle connection with quads'},
-    {n:'STANDING CALF RAISE', w:0, s:3, r:'15-20', rpe:'8', rest:'1-2 min', v:'calf', note:'Emphasize the mind-muscle connection'},
-    {n:'BANDED LATERAL WALK OR HIP ABDUCTION', w:0, s:3, r:'15-20', rpe:'8', rest:'1-2 min', v:'bandwalk', vars:WALKVAR, note:'Point toes slightly outward. Mind-muscle connection with glutes'},
-    {n:'V SIT-UP', w:0, s:3, r:'12-15', rpe:'8', rest:'1-2 min', v:'vsitup', note:'Think about squeezing your upper and lower abs together'},
-    {n:'NECK FLEXION/EXTENSION', w:1, s:3, r:'12/12', rpe:'8', rest:'1-2 min', opt:true, v:'neck', note:'12 reps flexion (front of neck), 12 reps extension (back of neck)'}
+  {id:'l2', name:'Lower #2', tag:'Trench Lower A - bilateral', ex:[
+    {n:'POGO JUMPS', w:0, s:1, r:'20-30 reps', rest:'-', opt:true, note:'Optional Trench primer. Knees relatively straight, bounce through the ankles, minimal ground contact, land quietly over the midfoot.'},
+    {n:'CALF RAISE', w:1, s:2, r:'6-12', rpe:'9-10', rest:'1-2 min', v:'calf', note:'1 bent-knee set + 1 straight-leg set (or 2 straight-leg if only one variation). Deep stretch, pause at the bottom, squeeze at the top.'},
+    {n:'HIP ADDUCTION', w:0, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', note:'Trench slot: Copenhagen, Roman chair, or adductor machine. Lengthened variations preferred. Largest comfortable range, control the eccentric.'},
+    {n:'LEG EXTENSION', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legext', note:'Trench pre-fatigue slot, before the squat. If pre-fatiguing consistently reduces squat performance after several weeks, move it after the squat and hinge work. Full range, control the eccentric.'},
+    {n:'BACK SQUAT', w:3, s:2, r:'3-5', rpe:'8', rest:'3-4 min', l:'squat', v:'squat', note:'Trench bilateral squat pattern (or top set x3 + backdown x5). Safety bar, front squat, hack, or pendulum all work. Brace before each rep, controlled descent, drive up explosively. Belt and sleeves if preferred.'},
+    {n:'ROMANIAN DEADLIFT', w:2, s:2, r:'3-5', rpe:'8', rest:'3-4 min', v:'dlconv', note:'Trench hip hinge slot (or top set x3 + backdown x5). Stiff-leg, conventional, trap bar, or good morning all work. Hips back, weight close, drive the hips through. Straps and belt recommended.'},
+    {n:'HIP ABDUCTION MACHINE', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', vars:WALKVAR, note:'Trench slot: machine or cable airplane. Pelvis level, lead with the outside of the hip, pause in the lengthened position, no momentum.'},
+    {n:'SEATED LEG CURL', w:1, s:2, r:'6-8', rpe:'9-10', rest:'1-2 min', v:'legcurl', note:'Seated preferred; glute-ham raise or unilateral lying curl also work. Full knee extension each rep, control the eccentric, squeeze at the top.'},
+    {n:'SIT-UP', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', v:'vsitup', note:'Trench lumbar flexion slot: GHD, decline, cable crunch, or hanging leg raise all work. Initiate with lumbar flexion, posterior pelvic tilt at the top.'},
+    {n:'DUMBBELL SIDE BEND', w:0, s:2, r:'6-10', rpe:'9-10', rest:'1-2 min', note:'Trench lateral flexion slot: cable or machine side bend also work. Spinal lateral flexion only, no torso rotation, pause in the stretch.'},
+    {n:'BOX JUMPS', w:0, s:1, r:'3-5 reps', rest:'-', opt:true, note:'Optional Trench power slot. Alternate box vertical jumps and box broad jumps. New to plyometrics: pogo jumps only for the first 4-6 weeks.'}
   ]},
   {id:'u2', name:'Upper #2', tag:'Close-grip bench + arms', ex:[
     {n:'CLOSE-GRIP BENCH PRESS', w:3, s:3, r:'10', rpe:'6', rest:'2-3 min', v:'cgbench', note:'Shoulder width grip, tuck your elbows in closer to your torso'},
