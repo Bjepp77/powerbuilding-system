@@ -1209,8 +1209,9 @@ function draftFor(xi){
   if(!state.draft[key][xi])state.draft[key][xi]={vals:[],done:[],n:weeks()[WO.wi].days[WO.di].ex[xi].s};
   return state.draft[key][xi];
 }
-function rowSync(ed,i,el){try{const ins=el.closest('tr').querySelectorAll('input:not(.setdone)');ed.vals[i]={w:ins[0].value,r:ins[1].value};}catch(e){}}
-function setVal(xi,i,f,v,el){const ed=draftFor(xi);if(!ed.vals[i])ed.vals[i]={w:'',r:''};if(el)rowSync(ed,i,el);ed.vals[i][f]=v;save();}
+function dec(v){return typeof v==='string'?v.replace(/^\s*(\d+),(\d+)\s*$/,'$1.$2'):v;}
+function rowSync(ed,i,el){try{const ins=el.closest('tr').querySelectorAll('input:not(.setdone)');ed.vals[i]={w:dec(ins[0].value),r:dec(ins[1].value)};}catch(e){}}
+function setVal(xi,i,f,v,el){const ed=draftFor(xi);if(!ed.vals[i])ed.vals[i]={w:'',r:''};if(el)rowSync(ed,i,el);ed.vals[i][f]=dec(v);save();}
 function setDone(xi,i,c,box){const ed=draftFor(xi);ed.done[i]=c;
   if(c&&box)rowSync(ed,i,box);
   save();if(c){var _ex=exAt(xi);if(_ex){var _s=parseRest(_ex.rest);if(_s>0)rtSet(_s,_ex.n,true);else rtSet(0,'NO REST - GO!',false);}}}
@@ -1363,7 +1364,7 @@ function renderMore(){
 }
 function setUnit(u){state.set.unit=u;save();renderAll();}
 function setW10(v){state.set.w10=v;const s=seq();if(state.pos>=s.length)state.pos=s.length-1;save();renderAll();}
-function setRM(k,v){state.set.rm[k]=v;save();toast(k.toUpperCase()+' 1RM saved');}
+function setRM(k,v){state.set.rm[k]=dec(v);save();toast(k.toUpperCase()+' 1RM saved');}
 function exportData(){
   const j=JSON.stringify(state);
   const box=document.getElementById('ioBox');if(box)box.value=j;
