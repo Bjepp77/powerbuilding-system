@@ -1192,9 +1192,9 @@ function renderWorkout(){
       }
       const done=ed.done&&ed.done[i];
       h+='<tr><td></td><td class="setnum">'+(i+1)+'</td>'+
-        '<td><input inputmode="decimal" value="'+esc(pw==null?'':pw)+'" placeholder="-" onchange="setVal('+xi+','+i+',\'w\',this.value,this)"></td>'+
-        '<td><input inputmode="decimal" value="'+esc(pr==null?'':pr)+'" placeholder="'+(ex.amrap?'AMRAP':'-')+'" onchange="setVal('+xi+','+i+',\'r\',this.value,this)"></td>'+
-        '<td><input type="checkbox" class="setdone" '+(done?'checked':'')+' onchange="setDone('+xi+','+i+',this.checked,this)"></td></tr>';
+        '<td><input aria-label="Set '+(i+1)+' weight" inputmode="decimal" value="'+esc(pw==null?'':pw)+'" placeholder="-" onchange="setVal('+xi+','+i+',\'w\',this.value,this)"></td>'+
+        '<td><input aria-label="Set '+(i+1)+' reps" inputmode="decimal" value="'+esc(pr==null?'':pr)+'" placeholder="'+(ex.amrap?'AMRAP':'-')+'" onchange="setVal('+xi+','+i+',\'r\',this.value,this)"></td>'+
+        '<td><input type="checkbox" aria-label="Set '+(i+1)+' done" class="setdone" '+(done?'checked':'')+' onchange="setDone('+xi+','+i+',this.checked,this)"></td></tr>';
     }
     h+='</table><button class="btn ghost sm" style="margin-top:8px" onclick="addSet('+xi+')">+ Add set</button>';
     h+='</div>';
@@ -1285,7 +1285,7 @@ function renderHistory(){
   const main=['BACK SQUAT','BARBELL BENCH PRESS','DEADLIFT','OVERHEAD PRESS'];
   if(!CHARTEX||!names.includes(CHARTEX))CHARTEX=main.find(m=>names.includes(m))||names[0];
   h+='<div class="chartbox"><div class="kicker">Estimated 1RM trend</div>';
-  h+='<div class="field" style="margin:8px 0"><select onchange="CHARTEX=this.value;renderHistory()">'+names.map(n=>'<option '+(n===CHARTEX?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select></div>';
+  h+='<div class="field" style="margin:8px 0"><select aria-label="Exercise" onchange="CHARTEX=this.value;renderHistory()">'+names.map(n=>'<option '+(n===CHARTEX?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select></div>';
   h+=chartSVG(CHARTEX)+'</div>';
   h+=state.history.slice(0,30).map((s,i)=>{
     const totalSets=s.ex.reduce((a,e)=>a+e.sets.length,0);
@@ -1351,12 +1351,12 @@ function renderMore(){
   h+='<div class="field"><label>Units</label><div class="seg"><button class="'+(s.unit==='lb'?'on':'')+'" onclick="setUnit(\'lb\')">lb</button><button class="'+(s.unit==='kg'?'on':'')+'" onclick="setUnit(\'kg\')">kg</button></div></div>';
   h+='<div class="field"><label>Week 10 max testing option</label><div class="seg"><button class="'+(s.w10==='10A'?'on':'')+'" onclick="setW10(\'10A\')">10A - AMRAP</button><button class="'+(s.w10==='10B'?'on':'')+'" onclick="setW10(\'10B\')">10B - Singles</button></div></div>';
   h+='<div class="field"><label>One-rep maxes (used for %1RM loads)</label><div class="rmgrid">'+
-    ['squat','bench','deadlift','ohp'].map(k=>'<div><label style="margin-bottom:4px">'+k.toUpperCase()+'</label><input inputmode="decimal" value="'+esc(s.rm[k])+'" placeholder="'+(s.unit==='kg'?'kg':'lb')+'" onchange="setRM(\''+k+'\',this.value)"></div>').join('')+'</div><p class="small" style="margin-top:8px">No 1RM? Estimate one: AMRAP a tough 3-5 rep set and plug it into a 1RM calculator, or use the app\'s e1RM trend after a few sessions.</p></div>';
+    ['squat','bench','deadlift','ohp'].map(k=>'<div><label style="margin-bottom:4px">'+k.toUpperCase()+'</label><input aria-label="'+k.toUpperCase()+' one-rep max" inputmode="decimal" value="'+esc(s.rm[k])+'" placeholder="'+(s.unit==='kg'?'kg':'lb')+'" onchange="setRM(\''+k+'\',this.value)"></div>').join('')+'</div><p class="small" style="margin-top:8px">No 1RM? Estimate one: AMRAP a tough 3-5 rep set and plug it into a 1RM calculator, or use the app\'s e1RM trend after a few sessions.</p></div>';
   h+='</div>';
   // backup
   h+='<div class="card"><div class="kicker">Backup &amp; restore</div>';
   h+='<div class="btnrow"><button class="btn ghost" onclick="exportData()">Export data</button><button class="btn ghost" onclick="importData()">Import data</button></div>';
-  h+='<div class="field" style="margin-top:10px"><textarea id="ioBox" rows="4" placeholder="Exported JSON appears here - paste a backup here and tap Import to restore"></textarea></div>';
+  h+='<div class="field" style="margin-top:10px"><textarea id="ioBox" aria-label="Backup data" rows="4" placeholder="Exported JSON appears here - paste a backup here and tap Import to restore"></textarea></div>';
   h+='<div class="divider"></div><button class="btn ghost" style="color:#e08a8d;border-color:#4a2628" onclick="resetAll()">Reset everything</button></div>';
   h+='<p class="small" style="text-align:center;margin-top:14px">All data lives on this device (localStorage). Works offline.</p>';
   el.innerHTML=h;
