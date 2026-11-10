@@ -911,9 +911,17 @@ const PROGRAM = [
 // ===== APP =====
 const LS='pbsys-v1';
 let state=load();
-function load(){try{const s=JSON.parse(localStorage.getItem(LS));if(s&&s.v===1)return s;}catch(e){}
-  return {v:1,pos:0,done:{},draft:{},lastByEx:{},history:[],vars:{},set:{unit:'lb',w10:'10A',rm:{squat:'',bench:'',deadlift:'',ohp:''}}};}
-function save(){localStorage.setItem(LS,JSON.stringify(state));}
+function defState(){return {v:1,pos:0,done:{},draft:{},lastByEx:{},history:[],vars:{},set:{unit:'lb',w10:'10A',rm:{squat:'',bench:'',deadlift:'',ohp:''}}};}
+function isObj(x){return !!x&&typeof x==='object'&&!Array.isArray(x);}
+function normState(s){const d=defState();const o=Object.assign(d,s);
+  ['done','draft','lastByEx','vars'].forEach(k=>{if(!isObj(o[k]))o[k]={};});
+  if(!Array.isArray(o.history))o.history=[];
+  if(typeof o.pos!=='number'||!(o.pos>=0))o.pos=0;
+  const ds=defState().set;o.set=Object.assign(ds,isObj(s.set)?s.set:{});o.set.rm=Object.assign(defState().set.rm,isObj(o.set.rm)?o.set.rm:{});
+  return o;}
+function load(){try{const s=JSON.parse(localStorage.getItem(LS));if(isObj(s)&&s.v===1)return normState(s);}catch(e){}
+  return defState();}
+function save(){try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){toast('Could not save (storage full or blocked)');}}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',2400);}
 
@@ -1363,7 +1371,10 @@ function exportData(){
 }
 function importData(){
   const box=document.getElementById('ioBox');if(!box||!box.value.trim()){toast('Paste a backup into the box first');return;}
-  try{const s=JSON.parse(box.value);if(!s||s.v!==1)throw 0;state=s;save();renderAll();toast('Backup restored');}catch(e){toast('That backup did not parse');}
+  let s;try{s=JSON.parse(box.value);}catch(e){toast('That backup did not parse');return;}
+  if(!isObj(s)||s.v!==1||!(Array.isArray(s.history)||isObj(s.done)||isObj(s.set)||isObj(s.lastByEx))){toast('That is not a Powerbuilding backup. Nothing was changed.');return;}
+  if(!confirm('Replace everything on this device with this backup?'))return;
+  const prev=state;try{state=normState(s);save();renderAll();toast('Backup restored');}catch(e){state=prev;save();renderAll();toast('That backup did not work. Previous data kept.');}
 }
 function resetAll(){if(confirm('Delete all logs, settings and progress on this device?')){localStorage.removeItem(LS);state=load();save();renderAll();showView('today');toast('Fresh start');}}
 
