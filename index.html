@@ -1209,9 +1209,9 @@ function draftFor(xi){
   if(!state.draft[key][xi])state.draft[key][xi]={vals:[],done:[],n:weeks()[WO.wi].days[WO.di].ex[xi].s};
   return state.draft[key][xi];
 }
-function dec(v){return typeof v==='string'?v.replace(/^\s*(\d+),(\d+)\s*$/,'$1.$2'):v;}
-function rowSync(ed,i,el){try{const ins=el.closest('tr').querySelectorAll('input:not(.setdone)');ed.vals[i]={w:dec(ins[0].value),r:dec(ins[1].value)};}catch(e){}}
-function setVal(xi,i,f,v,el){const ed=draftFor(xi);if(!ed.vals[i])ed.vals[i]={w:'',r:''};if(el)rowSync(ed,i,el);ed.vals[i][f]=dec(v);save();}
+function dec(v){return typeof v==='string'?v.replace(/^\s*(\d+),(\d{1,2})\s*$/,'$1.$2'):v;}
+function rowSync(ed,i,el){try{const ins=el.closest('tr').querySelectorAll('input:not(.setdone)');ed.vals[i]={w:dec(ins[0].value),r:ins[1].value};}catch(e){}}
+function setVal(xi,i,f,v,el){const ed=draftFor(xi);if(!ed.vals[i])ed.vals[i]={w:'',r:''};if(el)rowSync(ed,i,el);ed.vals[i][f]=f==='w'?dec(v):v;save();}
 function setDone(xi,i,c,box){const ed=draftFor(xi);ed.done[i]=c;
   if(c&&box)rowSync(ed,i,box);
   save();if(c){var _ex=exAt(xi);if(_ex){var _s=parseRest(_ex.rest);if(_s>0)rtSet(_s,_ex.n,true);else rtSet(0,'NO REST - GO!',false);}}}
