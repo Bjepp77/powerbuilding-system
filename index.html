@@ -1186,7 +1186,7 @@ function renderWorkout(){
       h+='<tr><td></td><td class="setnum">'+(i+1)+'</td>'+
         '<td><input inputmode="decimal" value="'+esc(pw==null?'':pw)+'" placeholder="-" onchange="setVal('+xi+','+i+',\'w\',this.value)"></td>'+
         '<td><input inputmode="decimal" value="'+esc(pr==null?'':pr)+'" placeholder="'+(ex.amrap?'AMRAP':'-')+'" onchange="setVal('+xi+','+i+',\'r\',this.value)"></td>'+
-        '<td><input type="checkbox" class="setdone" '+(done?'checked':'')+' onchange="setDone('+xi+','+i+',this.checked)"></td></tr>';
+        '<td><input type="checkbox" class="setdone" '+(done?'checked':'')+' onchange="setDone('+xi+','+i+',this.checked,this)"></td></tr>';
     }
     h+='</table><button class="btn ghost sm" style="margin-top:8px" onclick="addSet('+xi+')">+ Add set</button>';
     h+='</div>';
@@ -1202,7 +1202,9 @@ function draftFor(xi){
   return state.draft[key][xi];
 }
 function setVal(xi,i,f,v){const ed=draftFor(xi);if(!ed.vals[i])ed.vals[i]={w:'',r:''};ed.vals[i][f]=v;save();}
-function setDone(xi,i,c){const ed=draftFor(xi);ed.done[i]=c;save();if(c){var _ex=exAt(xi);if(_ex){var _s=parseRest(_ex.rest);if(_s>0)rtSet(_s,_ex.n,true);else rtSet(0,'NO REST - GO!',false);}}}
+function setDone(xi,i,c,box){const ed=draftFor(xi);ed.done[i]=c;
+  if(c&&box&&!(ed.vals[i]&&(ed.vals[i].w||ed.vals[i].r))){const ins=box.closest('tr').querySelectorAll('input:not(.setdone)');ed.vals[i]={w:ins[0]?ins[0].value:'',r:ins[1]?ins[1].value:''};}
+  save();if(c){var _ex=exAt(xi);if(_ex){var _s=parseRest(_ex.rest);if(_s>0)rtSet(_s,_ex.n,true);else rtSet(0,'NO REST - GO!',false);}}}
 function addSet(xi){const ed=draftFor(xi);ed.n=(ed.n||0)+1;save();renderWorkout();}
 function pickVar(n,label){state.vars[n]=label;save();renderWorkout();}
 function completeWorkout(){
