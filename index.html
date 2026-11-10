@@ -1094,7 +1094,7 @@ hb(['CABLE EXTERNAL ROTATION'],'Side-lying external rotation with a water bottle
 function hbwNorm(n){return String(n).toUpperCase().replace(/\s*\(.*?\)/g,'').replace(/\s+/g,' ').trim();}
 function homeBwFor(ex){var i,k,keys=[hbwNorm(ex.n)];if(ex.vars)ex.vars.forEach(function(v){keys.push(hbwNorm(v.label));});for(i=0;i<keys.length;i++){if(HOMEBW[keys[i]])return HOMEBW[keys[i]];}for(i=0;i<keys.length;i++){k=keys[i].replace(/ OR .*/,'');if(HOMEBW[k])return HOMEBW[k];}return null;}
 var RT={sec:0,left:0,at:0,t:null,label:''};
-function parseRest(s){if(!s)return 0;s=String(s);var m;if(/min/i.test(s)){m=s.match(/([\d.]+)/);return m?Math.round(parseFloat(m[1])*60):0;}m=s.match(/([\d.]+)/);return m?Math.round(parseFloat(m[1])):0;}
+function parseRest(s){if(!s)return 0;s=String(s);var m;if(/min/i.test(s)){m=s.match(/([\d.]+)(?:\s*[-\u2013]\s*([\d.]+))?/);return m?Math.round(parseFloat(m[2]||m[1])*60):0;}m=s.match(/([\d.]+)(?:\s*[-\u2013]\s*([\d.]+))?/);return m?Math.round(parseFloat(m[2]||m[1])):0;}
 function exAt(xi){try{return weeks()[WO.wi].days[WO.di].ex[xi];}catch(e){return null;}}
 function rtEl(){var el=document.getElementById('restTimer');if(!el){el=document.createElement('div');el.id='restTimer';el.innerHTML='<div id="rtTxt" onclick="rtToggle(event)">REST --:--</div><div class="rtb"><button onclick="rtBump(event,30)">+30</button><button onclick="rtBump(event,-30)">-30</button><button onclick="rtClose(event)">&times;</button></div>';document.body.appendChild(el);}return el;}
 function timerPreset(xi){var ex=exAt(xi);if(!ex)return;var s=parseRest(ex.rest);if(s>0)rtSet(s,ex.n,false);}
@@ -1192,9 +1192,9 @@ function renderWorkout(){
       }
       const done=ed.done&&ed.done[i];
       h+='<tr><td></td><td class="setnum">'+(i+1)+'</td>'+
-        '<td><input inputmode="decimal" value="'+esc(pw==null?'':pw)+'" placeholder="-" onchange="setVal('+xi+','+i+',\'w\',this.value,this)"></td>'+
-        '<td><input inputmode="decimal" value="'+esc(pr==null?'':pr)+'" placeholder="'+(ex.amrap?'AMRAP':'-')+'" onchange="setVal('+xi+','+i+',\'r\',this.value,this)"></td>'+
-        '<td><input type="checkbox" class="setdone" '+(done?'checked':'')+' onchange="setDone('+xi+','+i+',this.checked,this)"></td></tr>';
+        '<td><input aria-label="Set '+(i+1)+' weight" inputmode="decimal" value="'+esc(pw==null?'':pw)+'" placeholder="-" onchange="setVal('+xi+','+i+',\'w\',this.value,this)"></td>'+
+        '<td><input aria-label="Set '+(i+1)+' reps" inputmode="decimal" value="'+esc(pr==null?'':pr)+'" placeholder="'+(ex.amrap?'AMRAP':'-')+'" onchange="setVal('+xi+','+i+',\'r\',this.value,this)"></td>'+
+        '<td><input type="checkbox" aria-label="Set '+(i+1)+' done" class="setdone" '+(done?'checked':'')+' onchange="setDone('+xi+','+i+',this.checked,this)"></td></tr>';
     }
     h+='</table><button class="btn ghost sm" style="margin-top:8px" onclick="addSet('+xi+')">+ Add set</button>';
     h+='</div>';
@@ -1209,8 +1209,9 @@ function draftFor(xi){
   if(!state.draft[key][xi])state.draft[key][xi]={vals:[],done:[],n:weeks()[WO.wi].days[WO.di].ex[xi].s};
   return state.draft[key][xi];
 }
-function rowSync(ed,i,el){try{const ins=el.closest('tr').querySelectorAll('input:not(.setdone)');ed.vals[i]={w:ins[0].value,r:ins[1].value};}catch(e){}}
-function setVal(xi,i,f,v,el){const ed=draftFor(xi);if(!ed.vals[i])ed.vals[i]={w:'',r:''};if(el)rowSync(ed,i,el);ed.vals[i][f]=v;save();}
+function dec(v){return typeof v==='string'?v.replace(/^\s*(\d+),(\d{1,2})\s*$/,'$1.$2'):v;}
+function rowSync(ed,i,el){try{const ins=el.closest('tr').querySelectorAll('input:not(.setdone)');ed.vals[i]={w:dec(ins[0].value),r:ins[1].value};}catch(e){}}
+function setVal(xi,i,f,v,el){const ed=draftFor(xi);if(!ed.vals[i])ed.vals[i]={w:'',r:''};if(el)rowSync(ed,i,el);ed.vals[i][f]=f==='w'?dec(v):v;save();}
 function setDone(xi,i,c,box){const ed=draftFor(xi);ed.done[i]=c;
   if(c&&box)rowSync(ed,i,box);
   save();if(c){var _ex=exAt(xi);if(_ex){var _s=parseRest(_ex.rest);if(_s>0)rtSet(_s,_ex.n,true);else rtSet(0,'NO REST - GO!',false);}}}
@@ -1284,7 +1285,7 @@ function renderHistory(){
   const main=['BACK SQUAT','BARBELL BENCH PRESS','DEADLIFT','OVERHEAD PRESS'];
   if(!CHARTEX||!names.includes(CHARTEX))CHARTEX=main.find(m=>names.includes(m))||names[0];
   h+='<div class="chartbox"><div class="kicker">Estimated 1RM trend</div>';
-  h+='<div class="field" style="margin:8px 0"><select onchange="CHARTEX=this.value;renderHistory()">'+names.map(n=>'<option '+(n===CHARTEX?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select></div>';
+  h+='<div class="field" style="margin:8px 0"><select aria-label="Exercise" onchange="CHARTEX=this.value;renderHistory()">'+names.map(n=>'<option '+(n===CHARTEX?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select></div>';
   h+=chartSVG(CHARTEX)+'</div>';
   h+=state.history.slice(0,30).map((s,i)=>{
     const totalSets=s.ex.reduce((a,e)=>a+e.sets.length,0);
@@ -1350,12 +1351,12 @@ function renderMore(){
   h+='<div class="field"><label>Units</label><div class="seg"><button class="'+(s.unit==='lb'?'on':'')+'" onclick="setUnit(\'lb\')">lb</button><button class="'+(s.unit==='kg'?'on':'')+'" onclick="setUnit(\'kg\')">kg</button></div></div>';
   h+='<div class="field"><label>Week 10 max testing option</label><div class="seg"><button class="'+(s.w10==='10A'?'on':'')+'" onclick="setW10(\'10A\')">10A - AMRAP</button><button class="'+(s.w10==='10B'?'on':'')+'" onclick="setW10(\'10B\')">10B - Singles</button></div></div>';
   h+='<div class="field"><label>One-rep maxes (used for %1RM loads)</label><div class="rmgrid">'+
-    ['squat','bench','deadlift','ohp'].map(k=>'<div><label style="margin-bottom:4px">'+k.toUpperCase()+'</label><input inputmode="decimal" value="'+esc(s.rm[k])+'" placeholder="'+(s.unit==='kg'?'kg':'lb')+'" onchange="setRM(\''+k+'\',this.value)"></div>').join('')+'</div><p class="small" style="margin-top:8px">No 1RM? Estimate one: AMRAP a tough 3-5 rep set and plug it into a 1RM calculator, or use the app\'s e1RM trend after a few sessions.</p></div>';
+    ['squat','bench','deadlift','ohp'].map(k=>'<div><label style="margin-bottom:4px">'+k.toUpperCase()+'</label><input aria-label="'+k.toUpperCase()+' one-rep max" inputmode="decimal" value="'+esc(s.rm[k])+'" placeholder="'+(s.unit==='kg'?'kg':'lb')+'" onchange="setRM(\''+k+'\',this.value)"></div>').join('')+'</div><p class="small" style="margin-top:8px">No 1RM? Estimate one: AMRAP a tough 3-5 rep set and plug it into a 1RM calculator, or use the app\'s e1RM trend after a few sessions.</p></div>';
   h+='</div>';
   // backup
   h+='<div class="card"><div class="kicker">Backup &amp; restore</div>';
   h+='<div class="btnrow"><button class="btn ghost" onclick="exportData()">Export data</button><button class="btn ghost" onclick="importData()">Import data</button></div>';
-  h+='<div class="field" style="margin-top:10px"><textarea id="ioBox" rows="4" placeholder="Exported JSON appears here - paste a backup here and tap Import to restore"></textarea></div>';
+  h+='<div class="field" style="margin-top:10px"><textarea id="ioBox" aria-label="Backup data" rows="4" placeholder="Exported JSON appears here - paste a backup here and tap Import to restore"></textarea></div>';
   h+='<div class="divider"></div><button class="btn ghost" style="color:#e08a8d;border-color:#4a2628" onclick="resetAll()">Reset everything</button></div>';
   h+='<p class="small" style="text-align:center;margin-top:14px">All data lives on this device (localStorage). Works offline.</p>';
   el.innerHTML=h;
@@ -1363,7 +1364,7 @@ function renderMore(){
 }
 function setUnit(u){state.set.unit=u;save();renderAll();}
 function setW10(v){state.set.w10=v;const s=seq();if(state.pos>=s.length)state.pos=s.length-1;save();renderAll();}
-function setRM(k,v){state.set.rm[k]=v;save();toast(k.toUpperCase()+' 1RM saved');}
+function setRM(k,v){state.set.rm[k]=dec(v);save();toast(k.toUpperCase()+' 1RM saved');}
 function exportData(){
   const j=JSON.stringify(state);
   const box=document.getElementById('ioBox');if(box)box.value=j;
@@ -1395,6 +1396,9 @@ document.querySelectorAll('.tabbar button').forEach(b=>b.addEventListener('click
 document.getElementById('heroImg').style.backgroundImage='url('+window.__HERO__+')';
 renderAll();
 
+</script>
+<script>
+try{if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',function(){try{navigator.serviceWorker.register('sw.js').catch(function(){});}catch(e){}});}}catch(e){}
 </script>
 </body>
 </html>
