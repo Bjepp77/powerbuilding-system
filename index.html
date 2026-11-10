@@ -911,9 +911,17 @@ const PROGRAM = [
 // ===== APP =====
 const LS='pbsys-v1';
 let state=load();
-function load(){try{const s=JSON.parse(localStorage.getItem(LS));if(s&&s.v===1)return s;}catch(e){}
-  return {v:1,pos:0,done:{},draft:{},lastByEx:{},history:[],vars:{},set:{unit:'lb',w10:'10A',rm:{squat:'',bench:'',deadlift:'',ohp:''}}};}
-function save(){localStorage.setItem(LS,JSON.stringify(state));}
+function defState(){return {v:1,pos:0,done:{},draft:{},lastByEx:{},history:[],vars:{},set:{unit:'lb',w10:'10A',rm:{squat:'',bench:'',deadlift:'',ohp:''}}};}
+function isObj(x){return !!x&&typeof x==='object'&&!Array.isArray(x);}
+function normState(s){const d=defState();const o=Object.assign(d,s);
+  ['done','draft','lastByEx','vars'].forEach(k=>{if(!isObj(o[k]))o[k]={};});
+  if(!Array.isArray(o.history))o.history=[];
+  if(typeof o.pos!=='number'||!(o.pos>=0))o.pos=0;
+  const ds=defState().set;o.set=Object.assign(ds,isObj(s.set)?s.set:{});o.set.rm=Object.assign(defState().set.rm,isObj(o.set.rm)?o.set.rm:{});
+  return o;}
+function load(){try{const s=JSON.parse(localStorage.getItem(LS));if(isObj(s)&&s.v===1)return normState(s);}catch(e){}
+  return defState();}
+function save(){try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){toast('Could not save (storage full or blocked)');}}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',2400);}
 
@@ -949,7 +957,7 @@ function strKey(n){return String(n).toUpperCase().replace(/\([^)]*\)/g,'').repla
 function strWrite(name,w,r,unit,src){
   if(!(parseFloat(w)>0))return;
   const s=strLoad();const k=strKey(name);if(!k)return;
-  const rec={w:parseFloat(w),r:parseFloat(r)||null,date:new Date().toISOString().slice(0,10),unit:unit||'lb',src:src};
+  const rec={w:parseFloat(w),r:parseFloat(r)||null,date:(function(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');})(new Date()),unit:unit||'lb',src:src};
   const cur=s.ex[k];
   if(!cur||rec.w>cur.w||rec.date>cur.date){s.ex[k]=rec;try{localStorage.setItem(SQSTR,JSON.stringify(s));}catch(e){}}
 }
@@ -1097,7 +1105,7 @@ function rtTick(){RT.left=Math.max(0,RT.sec-(Date.now()-RT.at)/1000);rtPaint();i
 function rtBeep(){try{var C=window.AudioContext||window.webkitAudioContext;var c=new C();var o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.setValueAtTime(.2,c.currentTime);o.start();o.stop(c.currentTime+.35);}catch(e){}}
 function rtPaint(){var t=document.getElementById('rtTxt');if(!t)return;if(RT.sec<=0){t.innerHTML='<span class="rtex">'+RT.label+'</span>';return;}var l=Math.ceil(RT.left),m=Math.floor(l/60),s=l%60;t.innerHTML=(RT.label?'<span class="rtex">'+RT.label+'</span>':'')+'REST '+m+':'+(s<10?'0':'')+s;}
 function rtToggle(e){e.stopPropagation();if(RT.sec<=0)return;if(RT.t){RT.left=Math.max(0,RT.sec-(Date.now()-RT.at)/1000);RT.sec=RT.left;rtStop();rtPaint();}else{RT.sec=RT.left;rtStart();}}
-function rtBump(e,n){e.stopPropagation();if(RT.t){RT.sec=Math.max(0,RT.sec+n);RT.at=Date.now();}else{RT.sec=Math.max(0,RT.sec+n);RT.left=RT.sec;}rtPaint();}
+function rtBump(e,n){e.stopPropagation();if(RT.t)RT.left=Math.max(0,RT.sec-(Date.now()-RT.at)/1000);RT.left=Math.max(0,RT.left+n);RT.sec=RT.left;RT.at=Date.now();rtPaint();}
 function rtClose(e){e.stopPropagation();rtStop();var el=document.getElementById('restTimer');if(el)el.classList.remove('show');el.classList.remove('done');}
 /* === END ALTERNATES + TIMER === */
 
@@ -1184,9 +1192,9 @@ function renderWorkout(){
       }
       const done=ed.done&&ed.done[i];
       h+='<tr><td></td><td class="setnum">'+(i+1)+'</td>'+
-        '<td><input inputmode="decimal" value="'+esc(pw==null?'':pw)+'" placeholder="-" onchange="setVal('+xi+','+i+',\'w\',this.value)"></td>'+
-        '<td><input inputmode="decimal" value="'+esc(pr==null?'':pr)+'" placeholder="'+(ex.amrap?'AMRAP':'-')+'" onchange="setVal('+xi+','+i+',\'r\',this.value)"></td>'+
-        '<td><input type="checkbox" class="setdone" '+(done?'checked':'')+' onchange="setDone('+xi+','+i+',this.checked)"></td></tr>';
+        '<td><input inputmode="decimal" value="'+esc(pw==null?'':pw)+'" placeholder="-" onchange="setVal('+xi+','+i+',\'w\',this.value,this)"></td>'+
+        '<td><input inputmode="decimal" value="'+esc(pr==null?'':pr)+'" placeholder="'+(ex.amrap?'AMRAP':'-')+'" onchange="setVal('+xi+','+i+',\'r\',this.value,this)"></td>'+
+        '<td><input type="checkbox" class="setdone" '+(done?'checked':'')+' onchange="setDone('+xi+','+i+',this.checked,this)"></td></tr>';
     }
     h+='</table><button class="btn ghost sm" style="margin-top:8px" onclick="addSet('+xi+')">+ Add set</button>';
     h+='</div>';
@@ -1201,8 +1209,11 @@ function draftFor(xi){
   if(!state.draft[key][xi])state.draft[key][xi]={vals:[],done:[],n:weeks()[WO.wi].days[WO.di].ex[xi].s};
   return state.draft[key][xi];
 }
-function setVal(xi,i,f,v){const ed=draftFor(xi);if(!ed.vals[i])ed.vals[i]={w:'',r:''};ed.vals[i][f]=v;save();}
-function setDone(xi,i,c){const ed=draftFor(xi);ed.done[i]=c;save();if(c){var _ex=exAt(xi);if(_ex){var _s=parseRest(_ex.rest);if(_s>0)rtSet(_s,_ex.n,true);else rtSet(0,'NO REST - GO!',false);}}}
+function rowSync(ed,i,el){try{const ins=el.closest('tr').querySelectorAll('input:not(.setdone)');ed.vals[i]={w:ins[0].value,r:ins[1].value};}catch(e){}}
+function setVal(xi,i,f,v,el){const ed=draftFor(xi);if(!ed.vals[i])ed.vals[i]={w:'',r:''};if(el)rowSync(ed,i,el);ed.vals[i][f]=v;save();}
+function setDone(xi,i,c,box){const ed=draftFor(xi);ed.done[i]=c;
+  if(c&&box)rowSync(ed,i,box);
+  save();if(c){var _ex=exAt(xi);if(_ex){var _s=parseRest(_ex.rest);if(_s>0)rtSet(_s,_ex.n,true);else rtSet(0,'NO REST - GO!',false);}}}
 function addSet(xi){const ed=draftFor(xi);ed.n=(ed.n||0)+1;save();renderWorkout();}
 function pickVar(n,label){state.vars[n]=label;save();renderWorkout();}
 function completeWorkout(){
@@ -1361,7 +1372,10 @@ function exportData(){
 }
 function importData(){
   const box=document.getElementById('ioBox');if(!box||!box.value.trim()){toast('Paste a backup into the box first');return;}
-  try{const s=JSON.parse(box.value);if(!s||s.v!==1)throw 0;state=s;save();renderAll();toast('Backup restored');}catch(e){toast('That backup did not parse');}
+  let s;try{s=JSON.parse(box.value);}catch(e){toast('That backup did not parse');return;}
+  if(!isObj(s)||s.v!==1||!(Array.isArray(s.history)||isObj(s.done)||isObj(s.set)||isObj(s.lastByEx))){toast('That is not a Powerbuilding backup. Nothing was changed.');return;}
+  if(!confirm('Replace everything on this device with this backup?'))return;
+  const prev=state;try{state=normState(s);save();renderAll();toast('Backup restored');}catch(e){state=prev;save();renderAll();toast('That backup did not work. Previous data kept.');}
 }
 function resetAll(){if(confirm('Delete all logs, settings and progress on this device?')){localStorage.removeItem(LS);state=load();save();renderAll();showView('today');toast('Fresh start');}}
 
